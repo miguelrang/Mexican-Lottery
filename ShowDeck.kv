@@ -1,0 +1,95 @@
+ShowDeck:
+    id: showDeck
+    name: 'showDeck'
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTabs:
+            id: tabs
+            name: 'tabs'
+
+            tab_hint_x: True
+            default_tab: 2
+            background_color: (86/255, 19/255, 164/255, 1)
+            Cards:
+                id: cards
+                name: 'cards'
+
+                title: 'Cartas'
+            
+            Deck_:
+                id: deck
+                name: 'deck'
+
+                title: 'Mazo'
+
+<Cards>:
+	MDBoxLayout:
+	    orientation: 'vertical'
+	    md_bg_color: (37/255, 197/255, 237/255, 1)
+
+	    MDFloatLayout:
+	        cols: 1
+
+	        Image:
+	            source: 'wallpaper.png'
+                opacity: .5
+	            allow_stretch: True
+
+	        RecycleView:
+	            id: recycle_card
+	            name: 'recycle_card'
+
+	            key_viewclass: 'viewclass'
+	            #size_hint_x: .4
+	            pos_hint: {'center_x': .5, 'center_y': .5}
+	            key_size: 'height'
+
+	            RecycleGridLayout:
+	                id: recycle_grid
+	                name: 'recycle_grid'
+
+	                cols: 2
+	                spacing: dp(10)
+                    padding: dp(200), dp(5), dp(200), dp(5)
+	                default_size: None, dp(48)
+	                default_size_hint: 1, None
+	                size_hint_y: None
+	                height: self.minimum_height
+	                row_default_height: 680
+
+<Deck_>:
+	MDBoxLayout:
+        orientation: 'vertical'
+        md_bg_color: (37/255, 197/255, 237/255, 1)
+
+        MDFloatLayout:
+            cols: 1
+
+            Image:
+                source: 'wallpaper.png'
+                opacity: .5
+                allow_stretch: True
+
+            RecycleView:
+                id: recycle_deck
+                name: 'recycle_deck'
+
+                key_viewclass: 'viewclass'
+                #size_hint_x: .4
+                pos_hint: {'center_x': .5, 'center_y': .5}
+                key_size: 'height'
+
+                RecycleGridLayout:
+                    id: recycle_grid
+                    name: 'recycle_grid'
+
+                    cols: 5
+                    padding: dp(10), dp(0), dp(10), dp(0)
+                    spacing: dp(5)
+                    default_size: None, dp(48)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    row_default_height: 345                

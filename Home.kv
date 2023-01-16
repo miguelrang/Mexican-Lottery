@@ -1,0 +1,282 @@
+Home:
+    id: home
+    name: 'home'
+
+    MDFloatLayout:
+        cols: 1
+        md_bg_color: (37/255, 197/255, 237/255, 1)
+
+        Image:
+            allow_stretch: True
+            opacity: .6
+            source: 'wallpaper.png'
+
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            spacing: dp(5)
+            padding: dp(5), dp(10), dp(5), dp(5)
+            size_hint_x: .3
+            size_hint_y: .9
+            md_bg_color: (29/255, 47/255, 77/255, 1)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            canvas.before:
+                Color:
+                    rgba: (1, 1, 1, 1)
+    
+                Line:
+                    rectangle: self.pos[0], self.pos[1], self.size[0], self.size[1]
+                    width: 2
+            
+            MDLabel:
+                text: '[b][size=24][color=#ffffff]Seleccionar Carpetas de Figuras/Imagenes[/color][/size][/b]'
+                size_hint_y: .5
+                markup: True
+
+            MDGridLayout:
+                cols: 1
+                padding: dp(5), dp(5), dp(5), dp(2)
+                size_hint_y: .5
+
+                canvas.before:
+                    Color:
+                        rgb: (1, 1, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+            
+                MDTextField:
+                    id: folder
+                    name: 'folder'
+
+                    text: 'C:/Users/maiky/Documents/Codigos/Python/kivy/LoteriaDulceria/images2'
+                    hint_text: 'Carpeta de Imagenes (Obligatorio*)'
+                    on_focus:
+                        self.focus = False
+                        if self.focus == False:\
+                        root.openDirectory()
+                    theme_text_color: 'Custom'
+                    text_color: (0, 0, 0, 1)
+                    current_hint_text_color: (0, 0, 0, .8)
+                    line_color_normal: (0, 0, 0, 0)
+                    line_color_focus: (0, 0, 0, 0)        
+            Button:
+                id: find_folder
+                name: 'find_folder'
+
+                text: 'Buscar Carpeta'
+                size_hint_y: .5
+                font_size: dp(14)
+                background_color: (0, 0, 0, 0)
+                on_press: root.openDirectory()
+
+                canvas.before:
+                    Color:
+                        rgba: (37/255, 114/255, 237/255, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+
+            MDLabel:
+                size_hint_y: .1
+
+                canvas.before:
+                    Color:
+                        rgb: (.9, .9, .9)
+                    
+                    Line:
+                        points: self.pos[0], self.center_y, self.center_x+(self.center_x-self.pos[0]), self.center_y
+                        width: 2
+                    
+            MDLabel:
+                text: '[b][size=22][color=#ffffff]Modificar Tamaño de las Imagenes[/color][/size][/b]'
+                size_hint_y: .5
+                markup: True
+
+            MDGridLayout:
+                cols: 1
+                padding: dp(5), dp(5), dp(5), dp(2)
+                size_hint_y: .5
+
+                canvas.before:
+                    Color:
+                        rgb: (1, 1, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+            
+                MDTextField:
+                    id: height
+                    name: 'height'
+
+                    hint_text: 'Altura (Opcional)'
+                    input_filter: 'int'
+                    theme_text_color: 'Custom'
+                    text_color: (0, 0, 0, 1)
+                    current_hint_text_color: (0, 0, 0, .8)
+                    line_color_normal: (0, 0, 0, 0)
+                    line_color_focus: (0, 0, 0, 0)
+                
+            MDGridLayout:
+                id: x
+                cols: 1
+                padding: dp(5), dp(5), dp(5), dp(2)
+                size_hint_y: .5
+
+                canvas.before:
+                    Color:
+                        rgb: (1, 1, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+
+                MDTextField:
+                    id: width
+                    name: 'width'
+
+                    hint_text: 'Ancho (Opcional)'
+                    input_filter: 'int'
+                    theme_text_color: 'Custom'
+                    text_color: (0, 0, 0, 1)
+                    current_hint_text_color: (0, 0, 0, .8)
+                    line_color_normal: (0, 0, 0, 0)
+                    line_color_focus: (0, 0, 0, 0)
+            
+            MDLabel:
+                size_hint_y: .1
+
+                canvas.before:
+                    Color:
+                        rgb: (.9, .9, .9)
+                    
+                    Line:
+                        points: self.pos[0], self.center_y, self.center_x+(self.center_x-self.pos[0]), self.center_y
+                        width: 2
+
+            MDGridLayout:
+                cols: 1
+                padding: dp(5), dp(5), dp(5), dp(2)
+                size_hint_y: .5
+
+                canvas.before:
+                    Color:
+                        rgb: (1, 1, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+            
+                MDTextField:
+                    id: n_cards
+                    name: 'n_cards'
+
+                    hint_text: 'Numero de Cartas (Obligatorio*)'
+                    input_filter: 'int'
+                    theme_text_color: 'Custom'
+                    text_color: (0, 0, 0, 1)
+                    current_hint_text_color: (0, 0, 0, .8)
+                    line_color_normal: (0, 0, 0, 0)
+                    line_color_focus: (0, 0, 0, 0)        
+
+            MDGridLayout:
+                cols: 1
+                padding: dp(5), dp(5), dp(5), dp(2)
+                size_hint_y: .5
+
+                canvas.before:
+                    Color:
+                        rgb: (1, 1, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+            
+                MDTextField:
+                    id: minimum_repeated
+                    name: 'minimum_repeated'
+
+                    hint_text: 'Número Minimo de Casos Repetidos'
+                    disabled: True
+                    input_filter: 'int'
+                    theme_text_color: 'Custom'
+                    text_color: (0, 0, 0, 1)
+                    current_hint_text_color: (0, 0, 0, .8)
+                    line_color_normal: (0, 0, 0, 0)
+                    line_color_focus: (0, 0, 0, 0)
+
+            MDGridLayout:
+                cols: 1
+                padding: dp(5), dp(5), dp(5), dp(2)
+                size_hint_y: .5
+
+                canvas.before:
+                    Color:
+                        rgb: (1, 1, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+            
+                MDTextField:
+                    id: maximum_repeated
+                    name: 'maximum_repeated'
+
+                    hint_text: 'Número Máximo de Casos Repetidos'
+                    disabled: True
+                    input_filter: 'int'
+                    theme_text_color: 'Custom'
+                    text_color: (0, 0, 0, 1)
+                    current_hint_text_color: (0, 0, 0, .8)
+                    line_color_normal: (0, 0, 0, 0)
+                    line_color_focus: (0, 0, 0, 0)        
+            
+            MDGridLayout:
+                cols: 2
+                size_hint_y: .4
+                spacing: dp(14)
+
+                MDSwitch:
+                    id: allow
+                    name: 'allow'
+
+                    on_active: 
+                        if self.active == False:\
+                        minimum_repeated.text, minimum_repeated.disabled, maximum_repeated.text, maximum_repeated.disabled = '', True, '', True
+                        else:\
+                        minimum_repeated.disabled, maximum_repeated.disabled = False, False
+
+                MDLabel:
+                    text: '[color=ffffff][size=14][b]Permitir Figuras Repetidas (Ej. 2 Diablos)[/b][/size][/color]'
+                    markup: True
+
+            Button:
+                id: show_deck
+                name: 'show_deck'
+
+                text: 'Mostrar Cartas & Baraja'
+                size_hint_y: .5
+                font_size: dp(14)
+                background_color: (0, 0, 0, 0)
+                on_press: root.showDeck(folder.text, height.text, width.text, n_cards.text, minimum_repeated.text, maximum_repeated.text, allow.active)
+
+                canvas.before:
+                    Color:
+                        rgba: (37/255, 114/255, 237/255, 1)
+                    
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+        
+        MDSpinner:
+            id: loading
+            name: 'loading'
+
+            active: False
+            size_hint: (None, None)
+            size: dp(50), dp(50)
+            pos_hint: {'center_x': .5, 'center_y': .5}
