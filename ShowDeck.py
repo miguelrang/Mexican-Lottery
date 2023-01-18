@@ -476,123 +476,92 @@ class ShowDeck(Screen):
 			return core_img.texture
 
 		def setCards(imgs, cards:int, max:int, min:int):
+			#def replaceFigure(figure):
+			#	return 1
+
 			repeat_allowed = max != None and min != None
 			for i in range(cards):
 				figures = []
 				repeated = 0
 				max_fig_repeated:int = 0
-				while True:
-					for j in range(16):
-						while True:
-							figure = random.choice(imgs)
-							if repeat_allowed:
-								if figures.count(figure) == 0:
-									figures.append(figure)
-									break
-								elif figures.count(figure) == 1 and repeated < max:
-									figures.append(figure)
-									repeated += 1
-									break
+				for j in range(16):
+					while True:
+						figure = random.choice(imgs)
+						if repeat_allowed:
+							if figure not in figures:
+								figures.append(figure)
+								break
+							elif figures.count(figure) == 1 and repeated < max:
+								figures.append(figure)
+								repeated += 1
+								break
 
-							else: # not allowed
-								if figure not in figures:
-									# not repeated
-									figures.append(figure)
-									break
+						else: # not allowed
+							if figure not in figures:
+								# not repeated
+								figures.append(figure)
+								break
 
-					if i % 2 != 0:
-						color = (234/255, 218/255, 0, 1)
-					else:
-						color = (0, 3/255, 234/255, 1)
-					if repeat_allowed == True:
-						if repeated >= min:
-							self.ids.cards.ids.recycle_card.data.append(
-								{
-									'viewclass': 'Card',
-									'size_hint_y': 1,#3.5,
-									'cols': 4,
-									'padding': (dp(5), dp(5), dp(5), dp(5)), 
-									'spacing': dp(5),
-									'md_bg_color': color,
-									'texture1': texture('images/' + figures[0]),
-									'label1': figures[0].replace('.png', '').replace('.jpg', ''),
-									'texture2': texture('images/' + figures[1]),
-									'label2': figures[1].replace('.png', '').replace('.jpg', ''),
-									'texture3': texture('images/' + figures[2]),
-									'label3': figures[2].replace('.png', '').replace('.jpg', ''),
-									'texture4': texture('images/' + figures[3]),
-									'label4': figures[3].replace('.png', '').replace('.jpg', ''),
-									'texture5': texture('images/' + figures[4]),
-									'label5': figures[4].replace('.png', '').replace('.jpg', ''),
-									'texture6': texture('images/' + figures[5]),
-									'label6': figures[5].replace('.png', '').replace('.jpg', ''),
-									'texture7': texture('images/' + figures[6]),
-									'label7': figures[6].replace('.png', '').replace('.jpg', ''),
-									'texture8': texture('images/' + figures[7]),
-									'label8': figures[7].replace('.png', '').replace('.jpg', ''),
-									'texture9': texture('images/' + figures[8]),
-									'label9': figures[8].replace('.png', '').replace('.jpg', ''),
-									'texture10': texture('images/' + figures[9]),
-									'label10': figures[9].replace('.png', '').replace('.jpg', ''),
-									'texture11': texture('images/' + figures[10]),
-									'label11': figures[10].replace('.png', '').replace('.jpg', ''),
-									'texture12': texture('images/' + figures[11]),
-									'label12': figures[11].replace('.png', '').replace('.jpg', ''),
-									'texture13': texture('images/' + figures[12]),
-									'label13': figures[12].replace('.png', '').replace('.jpg', ''),
-									'texture14': texture('images/' + figures[13]),
-									'label14': figures[13].replace('.png', '').replace('.jpg', ''),
-									'texture15': texture('images/' + figures[14]),
-									'label15': figures[14].replace('.png', '').replace('.jpg', ''),
-									'texture16': texture('images/' + figures[15]),
-									'label16': figures[15].replace('.png', '').replace('.jpg', '')
-								}
-							)
+				if i % 2 != 0:
+					color = (234/255, 218/255, 0, 1)
+				else:
+					color = (0, 3/255, 234/255, 1)
+				
+				if repeat_allowed == True and repeated < min:
+					figures_copy = figures.copy()
+
+					while True:
+						fig_to_duplicate = random.choice(figures)
+						figures_copy.remove(fig_to_duplicate)
+
+						fig_to_replace = random.choice(figures_copy)
+						repeated += 1
+
+						if repeated == min:
 							break
-					else:
-						self.ids.cards.ids.recycle_card.data.append(
-							{
-								'viewclass': 'Card',
-								'size_hint_y': 1,#3.5,
-								'cols': 4,
-								'padding': (dp(5), dp(5), dp(5), dp(5)), 
-								'spacing': dp(5),
-								'md_bg_color': color,
-								'texture1': texture('images/' + figures[0]),
-								'label1': figures[0].replace('.png', '').replace('.jpg', ''),
-								'texture2': texture('images/' + figures[1]),
-								'label2': figures[1].replace('.png', '').replace('.jpg', ''),
-								'texture3': texture('images/' + figures[2]),
-								'label3': figures[2].replace('.png', '').replace('.jpg', ''),
-								'texture4': texture('images/' + figures[3]),
-								'label4': figures[3].replace('.png', '').replace('.jpg', ''),
-								'texture5': texture('images/' + figures[4]),
-								'label5': figures[4].replace('.png', '').replace('.jpg', ''),
-								'texture6': texture('images/' + figures[5]),
-								'label6': figures[5].replace('.png', '').replace('.jpg', ''),
-								'texture7': texture('images/' + figures[6]),
-								'label7': figures[6].replace('.png', '').replace('.jpg', ''),
-								'texture8': texture('images/' + figures[7]),
-								'label8': figures[7].replace('.png', '').replace('.jpg', ''),
-								'texture9': texture('images/' + figures[8]),
-								'label9': figures[8].replace('.png', '').replace('.jpg', ''),
-								'texture10': texture('images/' + figures[9]),
-								'label10': figures[9].replace('.png', '').replace('.jpg', ''),
-								'texture11': texture('images/' + figures[10]),
-								'label11': figures[10].replace('.png', '').replace('.jpg', ''),
-								'texture12': texture('images/' + figures[11]),
-								'label12': figures[11].replace('.png', '').replace('.jpg', ''),
-								'texture13': texture('images/' + figures[12]),
-								'label13': figures[12].replace('.png', '').replace('.jpg', ''),
-								'texture14': texture('images/' + figures[13]),
-								'label14': figures[13].replace('.png', '').replace('.jpg', ''),
-								'texture15': texture('images/' + figures[14]),
-								'label15': figures[14].replace('.png', '').replace('.jpg', ''),
-								'texture16': texture('images/' + figures[15]),
-								'label16': figures[15].replace('.png', '').replace('.jpg', '')
-							}
-						)
-						break
+
+				self.ids.cards.ids.recycle_card.data.append(
+					{
+						'viewclass': 'Card',
+						'size_hint_y': 1,#3.5,
+						'cols': 4,
+						'padding': (dp(5), dp(5), dp(5), dp(5)), 
+						'spacing': dp(5),
+						'md_bg_color': color,
+						'texture1': texture('images/' + figures[0]),
+						'label1': figures[0].replace('.png', '').replace('.jpg', ''),
+						'texture2': texture('images/' + figures[1]),
+						'label2': figures[1].replace('.png', '').replace('.jpg', ''),
+						'texture3': texture('images/' + figures[2]),
+						'label3': figures[2].replace('.png', '').replace('.jpg', ''),
+						'texture4': texture('images/' + figures[3]),
+						'label4': figures[3].replace('.png', '').replace('.jpg', ''),
+						'texture5': texture('images/' + figures[4]),
+						'label5': figures[4].replace('.png', '').replace('.jpg', ''),
+						'texture6': texture('images/' + figures[5]),
+						'label6': figures[5].replace('.png', '').replace('.jpg', ''),
+						'texture7': texture('images/' + figures[6]),
+						'label7': figures[6].replace('.png', '').replace('.jpg', ''),
+						'texture8': texture('images/' + figures[7]),
+						'label8': figures[7].replace('.png', '').replace('.jpg', ''),
+						'texture9': texture('images/' + figures[8]),
+						'label9': figures[8].replace('.png', '').replace('.jpg', ''),
+						'texture10': texture('images/' + figures[9]),
+						'label10': figures[9].replace('.png', '').replace('.jpg', ''),
+						'texture11': texture('images/' + figures[10]),
+						'label11': figures[10].replace('.png', '').replace('.jpg', ''),
+						'texture12': texture('images/' + figures[11]),
+						'label12': figures[11].replace('.png', '').replace('.jpg', ''),
+						'texture13': texture('images/' + figures[12]),
+						'label13': figures[12].replace('.png', '').replace('.jpg', ''),
+						'texture14': texture('images/' + figures[13]),
+						'label14': figures[13].replace('.png', '').replace('.jpg', ''),
+						'texture15': texture('images/' + figures[14]),
+						'label15': figures[14].replace('.png', '').replace('.jpg', ''),
+						'texture16': texture('images/' + figures[15]),
+						'label16': figures[15].replace('.png', '').replace('.jpg', '')
+					}
+				)		
 
 		def setDeck(deck:list):
 			i:int = 0
